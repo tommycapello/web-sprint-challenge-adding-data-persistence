@@ -12,7 +12,7 @@ server.use('/api/resources', resourceRouter)
 server.use('/api/tasks', taskRouter)
 
 server.use((err, req, res, next) => { // eslint-disable-line
-    res.status(err.status).json({
+    res.status(err.status || 500).json({
         message: err.message
     })
 })
