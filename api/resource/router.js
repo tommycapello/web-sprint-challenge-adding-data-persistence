@@ -10,8 +10,15 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-router.post('/', (req, res, next) => {
-
+router.post('/', async(req, res, next) => {
+    try{
+        const resource = req.body
+        const addedResource = await Resource.addResource(resource)
+        res.json(addedResource)
+    }
+    catch(err){
+        next(err)
+    }
 })
 
 module.exports = router

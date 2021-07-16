@@ -10,8 +10,15 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-router.post('/', (req, res, next) => {
-
+router.post('/', async(req, res, next) => {
+    try{
+        const task = req.body
+        const addedTask = await Task.addProject(task)
+        res.json(addedTask)
+    }
+    catch(err){
+        next(err)
+    }
 })
 
 
