@@ -11,4 +11,10 @@ server.use('/api/project', projectRouter)
 server.use('/api/resource', resourceRouter)
 server.use('/api/task', taskRouter)
 
+server.use((err, req, res, next) => { // eslint-disable-line
+    res.status(err.status).json({
+        message: err.message
+    })
+})
+
 module.exports = server
