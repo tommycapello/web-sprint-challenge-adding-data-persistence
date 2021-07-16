@@ -3,14 +3,15 @@ const db = require('../../data/dbConfig')
 
 async function getProjects(){
     const projects = await db('projects')
-    return projects
+    const results = projects.map(project =>
+         project = {...project, project_completed: Boolean(project.project_completed)}
+    )
+    return results
 }
 
- function addProject(project){
-    return db('projects').insert(project)
-    .then(([project_id]) => {
-        return db('projects').where('project_id', project_id).first()
-    })
-}
+async  function addProject(project){
+    const addedProject = await db('projects').insert(project)
+    const result = await db('projects').where('project_id', addedProject.project_id).first()
+    return result}
 
 module.exports = { getProjects, addProject }
